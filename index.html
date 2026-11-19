@@ -1,0 +1,699 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Maima Rush</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Figtree:wght@400..800&display=swap">
+<style>
+/* Auftritt der maima Lounge: Salbei, Lavendel, Koralle und Dunkelgrau aus dem Logo, weiche runde Formen mit weißen Konturen.
+   Layout: ein Handy-Bildschirm, von oben nach unten: Anzeige, Theke (Salbei-Fläche) mit Gast und Bon, Durchatmen, 3x3 Stationen.
+   Bewusst nur ein heller Look, damit das Spiel auf jedem Handy nach maima aussieht. */
+:root{
+  color-scheme:light;
+  --sage:#A5B99C; --sage-deep:#496058; --sage-soft:#DDE6D7; --sage-tint:#F2F5F0;
+  --lav:#BCA5CC; --lav-soft:#EBE4F1;
+  --coral:#F99471; --coral-shade:#D9775A; --coral-deep:#DD5238;
+  --ink:#4A4A49; --ink-strong:#333634; --ink-soft:#6C716D;
+  --white:#FFFFFF; --line:#CBD6C5;
+  --bg:var(--sage-tint); --surface:var(--white);
+  --overlay:rgba(51,54,52,.64); --shadow:rgba(51,54,52,.16); --glass:rgba(255,255,255,.3);
+  --c-esp:#4A2C1D; --c-oat:#EBDDBF; --c-foam:#FFFDF6; --c-matcha:#8DBB4E; --c-chai:#C98B45;
+  --c-cocoa:#6B3F2A; --c-ice:#CFEAF5; --c-art:#E8588C; --c-woener:#E0A040;
+  --f-display:"Fraunces","Cooper Black",Georgia,serif;
+  --f-body:"Figtree","Avenir Next","Segoe UI",system-ui,sans-serif;
+}
+
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;font-weight:500;
+  overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer;touch-action:manipulation}
+button:focus-visible{outline:3px solid var(--sage-deep);outline-offset:2px}
+#app{position:relative;height:100%;max-width:480px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px}
+.screen{height:100%;display:flex;flex-direction:column;gap:10px;min-height:0}
+p{margin:0}
+/* Fette, weiche Serifenschrift wie die Wortmarke */
+h1,h2,.fat{font-family:var(--f-display);font-weight:900;font-variation-settings:"SOFT" 100,"WONK" 0;margin:0;line-height:1.02;text-wrap:balance;color:var(--ink)}
+/* Gesperrte Versalien wie „LOUNGE“ im Logo */
+.kicker{font-weight:700;font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft)}
+.quote{font-family:var(--f-display);font-style:italic;font-weight:500;font-variation-settings:"SOFT" 100,"WONK" 0}
+
+/* Knöpfe */
+.btn{font-weight:800;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;background:var(--coral);color:var(--ink-strong);
+  padding:15px 28px;border-radius:999px;box-shadow:0 5px 0 var(--coral-shade);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--coral-shade)}
+.btn.ghost{background:var(--surface);color:var(--ink);font-size:.78rem;padding:9px 16px;box-shadow:0 0 0 2px var(--line)}
+.btn.ghost:active{transform:none;box-shadow:0 0 0 2px var(--sage)}
+.iconbtn{width:38px;height:38px;border-radius:50%;background:var(--surface);font-weight:800;font-size:.8rem;box-shadow:0 0 0 2px var(--line)}
+
+/* Start */
+#s-start{align-items:center;text-align:center;gap:14px;overflow:auto}
+.lockup{display:flex;flex-direction:column;align-items:center;width:100%}
+.brand{display:block;width:min(100%,310px);height:auto}
+.rush{display:inline-block;font-size:clamp(3.2rem,17vw,4.6rem);line-height:.9;color:var(--ink);background:var(--coral);
+  padding:.08em .34em .2em;border:5px solid var(--white);border-radius:56% 44% 52% 48%/58% 50% 50% 42%;
+  transform:rotate(-5deg);margin:-6px 0 0 34%;box-shadow:0 6px 16px var(--shadow)}
+.tagline{font-size:1.45rem;line-height:1.1;color:var(--ink)}
+.howto{list-style:none;margin:0;padding:14px 16px;background:var(--surface);border-radius:22px;display:grid;gap:10px;text-align:left;width:100%;font-size:.95rem}
+.howto li{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center}
+.howto .ic{font-size:1.5rem;text-align:center}
+.best{font-size:.9rem;color:var(--ink-soft);font-weight:700;min-height:1.2em}
+.startfoot{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.by{font-size:.8rem;font-weight:700;color:var(--ink-soft)}
+
+/* Anzeige oben */
+.hud{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
+.hud-tip .lbl{display:block;font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+.hud-tip b{font-size:1.45rem;font-variant-numeric:lining-nums tabular-nums}
+.hud-round{font-weight:800;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--lav);color:var(--ink-strong);padding:7px 13px;border-radius:999px;white-space:nowrap}
+.hud-right{display:flex;justify-content:flex-end;align-items:center;gap:10px}
+#vibes{display:flex;gap:7px;align-items:center}
+.vibe{width:15px;height:15px;background:var(--coral);border-radius:0 100% 0 100%;transform:rotate(45deg);box-shadow:0 0 0 2px var(--white)}
+.vibe.off{background:var(--sage-soft)}
+
+/* Theke: die Salbei-Fläche aus dem Logo */
+.stage{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;gap:9px;background:var(--sage);color:var(--ink-strong);border-radius:34px 30px 38px 28px;padding:14px;overflow:hidden}
+.queue{display:flex;gap:4px;align-items:center;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;min-height:22px}
+.queue i{font-style:normal;font-size:1.05rem;letter-spacing:0}
+.guest{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;transition:transform .28s cubic-bezier(.2,.9,.3,1.2),opacity .2s}
+.guest.out{transform:translateX(-120%);opacity:0}
+.guest.in{transform:translateX(120%);opacity:0;transition:none}
+.avatar{width:clamp(66px,10vh,84px);height:clamp(66px,10vh,84px);border-radius:50%;background:var(--white);display:grid;place-items:center;font-size:2.4rem;position:relative}
+.avatar .mood{position:absolute;right:-6px;bottom:-6px;font-size:1.25rem}
+.gtext{min-width:0}
+.gname{font-weight:800;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
+.gline{font-size:1.28rem;line-height:1.12;overflow-wrap:anywhere}
+.patience{height:12px;border-radius:999px;background:var(--white);overflow:hidden;flex:none}
+.pbar{height:100%;width:100%;background:var(--sage-deep);border-radius:999px}
+.pbar.mid{background:var(--coral)} .pbar.low{background:var(--coral-deep)} .pbar.frozen{background:var(--lav)}
+.pass{flex:1;min-height:0;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:end}
+.bon{background:var(--white);color:var(--ink);border-radius:22px;padding:12px 14px 14px;align-self:stretch;display:flex;flex-direction:column;gap:9px;justify-content:center;min-width:0}
+.bon-title{font-size:clamp(1.1rem,2.8vh,1.4rem);line-height:1.05}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.steps li{width:clamp(42px,6.4vh,52px);height:clamp(42px,6.4vh,52px);border-radius:14px;background:var(--sage-tint);display:grid;place-items:center;font-size:clamp(1.4rem,3.5vh,1.75rem);border:2px dashed var(--line);position:relative;transition:transform .15s}
+.steps li.next{border:3px solid var(--coral);background:var(--white);transform:scale(1.08)}
+.steps li.done{border:2px solid var(--sage);opacity:.55}
+.steps li.done::after{content:"✓";position:absolute;right:-5px;top:-7px;font-size:.8rem;font-weight:800;background:var(--sage-deep);color:var(--white);width:17px;height:17px;border-radius:50%;display:grid;place-items:center}
+.glass{width:clamp(64px,9.5vh,84px);height:clamp(104px,16vh,140px);border:4px solid var(--white);border-top:0;border-radius:8px 8px 22px 22px;background:var(--glass);position:relative;overflow:visible;transition:transform .3s,opacity .3s}
+.layers{position:absolute;inset:0;display:flex;flex-direction:column-reverse;border-radius:3px 3px 17px 17px;overflow:hidden}
+.layers div{height:0;transition:height .22s ease-out}
+.topper{position:absolute;left:0;right:0;text-align:center;font-size:1.5rem;bottom:100%;margin-bottom:-14px;transform:scale(0);transition:transform .25s cubic-bezier(.2,.9,.3,1.5)}
+.topper.on{transform:scale(1)}
+.glass.plate{border-color:transparent;background:none}
+.glass.plate .topper{bottom:18px;font-size:3.2rem;margin:0}
+.glass.served{transform:translateY(-70px) scale(.7);opacity:0}
+.toast{position:absolute;left:12px;right:12px;top:10px;z-index:5;background:var(--ink-strong);color:var(--white);font-weight:700;text-align:center;padding:10px 14px;border-radius:18px;transform:translateY(-170%);transition:transform .25s;pointer-events:none}
+.toast.on{transform:none}
+.toast.alarm{background:var(--coral);color:var(--ink-strong);box-shadow:0 0 0 3px var(--white)}
+.pop{position:absolute;z-index:6;font-size:1.2rem;background:var(--white);color:var(--ink-strong);padding:3px 12px 5px;border-radius:999px;pointer-events:none;animation:pop 1s ease-out forwards;white-space:nowrap;font-variant-numeric:lining-nums}
+.pop.bad{background:var(--coral-deep);color:var(--white)}
+@keyframes pop{from{transform:translateY(0);opacity:1}to{transform:translateY(-60px);opacity:0}}
+
+/* Flow und Durchatmen */
+.actions{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:44px}
+.flow{font-weight:800;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;background:var(--coral);color:var(--ink-strong);padding:7px 13px;border-radius:999px;white-space:nowrap}
+.flow:empty{visibility:hidden}
+.breath{background:var(--lav);color:var(--ink-strong);font-weight:800;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:9px 10px 9px 16px;border-radius:999px;display:flex;gap:9px;align-items:center;white-space:nowrap}
+.breath b{background:var(--white);color:var(--ink-strong);border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:.9rem;letter-spacing:0}
+.breath:disabled{opacity:.45}
+.breath.active{background:var(--ink-strong);color:var(--white)}
+
+/* Stationen */
+.stations{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.st{height:clamp(54px,10.5vh,84px);border-radius:20px;background:var(--white);box-shadow:0 4px 0 var(--sage-soft);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;transition:transform .06s,box-shadow .06s;position:relative;overflow:hidden}
+.st::before{content:"";position:absolute;top:8px;right:8px;width:9px;height:9px;border-radius:50%;background:var(--stc,transparent);box-shadow:0 0 0 1px var(--line)}
+.st:active{transform:translateY(3px);box-shadow:0 1px 0 var(--sage-soft)}
+.st-i{font-size:1.65rem;line-height:1}
+.st-l{font-size:.74rem;font-weight:800;color:var(--ink)}
+.st.hint{animation:hint .7s ease-in-out infinite alternate}
+@keyframes hint{to{box-shadow:0 4px 0 var(--coral),0 0 0 4px var(--coral)}}
+.st.wrong{animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}}
+.st.broken{background:repeating-linear-gradient(45deg,var(--coral) 0 10px,var(--white) 10px 20px)}
+.st.broken .st-l{background:var(--white);color:var(--ink-strong);padding:1px 7px;border-radius:999px}
+.st.gold{background:var(--coral);box-shadow:0 4px 0 var(--coral-shade)}
+.st.gold .st-l{color:var(--ink-strong)}
+.st.gold::before{display:none}
+.stations.warn{outline:4px dashed var(--coral-deep);outline-offset:3px;border-radius:20px}
+.hazard{position:absolute;inset:-4px;z-index:4;border-radius:22px;background:var(--overlay);display:grid;place-items:center;overflow:hidden}
+.hazard b{font-size:1.9rem;color:var(--ink-strong);background:var(--coral);text-align:center;line-height:1.05;padding:10px 20px 13px;margin:0 14px;border-radius:30px 26px 32px 24px;box-shadow:0 0 0 4px var(--white)}
+.hazard b small{display:block;font-family:var(--f-body);font-weight:800;font-size:.85rem;font-variation-settings:normal;margin-top:4px}
+#crawler{position:absolute;bottom:6px;left:0;font-size:3rem;will-change:transform;z-index:1}
+
+/* Yoga-Pause: die Salbei-Fläche mit der Lotus-Tasse atmet */
+#s-yoga{align-items:center;text-align:center;gap:12px}
+#s-yoga h2{font-size:2.1rem}
+.pose{font-size:1.25rem;line-height:1.15}
+.pad{position:relative;width:min(70vw,270px);aspect-ratio:1;max-width:100%;border-radius:50%;display:grid;place-items:center;flex:none}
+.ring{position:absolute;border-radius:50%;border:3px dashed var(--ink-soft);inset:0;z-index:2;pointer-events:none}
+.ring.in{inset:27.5%}
+.blob{position:absolute;inset:0;border-radius:50%;background:var(--sage);transform:scale(.45);display:grid;place-items:center}
+.blob img{width:44%;height:auto;display:block;pointer-events:none}
+.padlbl{font-size:1.6rem}
+.fb{font-weight:800;font-size:1rem;min-height:1.4em;color:var(--ink)}
+.zen{width:100%;height:16px;border-radius:999px;background:var(--white);overflow:hidden;box-shadow:0 0 0 2px var(--line)}
+.zen div{height:100%;width:0;background:var(--lav);border-radius:999px;transition:width .3s}
+.hint-txt{font-size:.9rem;color:var(--ink-soft);font-weight:600}
+
+/* Feierabend */
+#s-end{align-items:center;text-align:center;gap:12px;overflow:auto}
+.endico{width:clamp(56px,11vh,92px);height:auto;display:block;flex:none}
+#s-end h2{font-size:clamp(1.8rem,9vw,2.3rem)}
+.bigtip{font-size:3.2rem;line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.rank{font-weight:800;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;background:var(--lav);color:var(--ink-strong);padding:9px 18px;border-radius:999px;transform:rotate(-2deg);box-shadow:0 0 0 3px var(--white)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;margin:0}
+.stats div{background:var(--surface);border-radius:18px;padding:10px 6px}
+.stats dt{font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.stats dd{margin:3px 0 0;font-size:1.1rem;white-space:nowrap;font-variant-numeric:lining-nums}
+.gruss{font-size:1.18rem;line-height:1.25;background:var(--sage);color:var(--ink-strong);padding:16px 18px;border-radius:30px 26px 32px 24px;max-width:34ch}
+
+/* Karte über dem Spiel */
+#overlay{position:absolute;inset:0;z-index:20;background:var(--overlay);display:grid;place-items:center;padding:24px}
+.card{background:var(--surface);border-radius:30px;padding:24px 20px;width:100%;max-width:340px;text-align:center;display:grid;gap:12px;justify-items:center;box-shadow:0 10px 30px var(--shadow)}
+.card h2{font-size:1.8rem}
+.card p{font-size:1rem;line-height:1.4}
+.card .emo{font-size:2.6rem;line-height:1}
+.shake{animation:shake .3s}
+@media (prefers-reduced-motion:reduce){ .st.hint,.shake,.st.wrong{animation:none} .st.hint{box-shadow:0 0 0 4px var(--coral)} .guest,.layers div,.topper,.toast{transition:none} }
+#s-start>:first-child,#s-yoga>:first-child,#s-end>:first-child{margin-top:auto}
+#s-start>:last-child,#s-yoga>:last-child,#s-end>:last-child{margin-bottom:auto}
+</style>
+
+<div id="app">
+  <section id="s-start" class="screen">
+    <p class="kicker" id="startKicker"></p>
+    <h1 class="lockup"><img class="brand" src="maima-logo.png" alt="maima Lounge" width="960" height="237"><span class="rush">rush</span></h1>
+    <p class="tagline quote">Yoga. Kaffee. Chaos.</p>
+    <ul class="howto">
+      <li><span class="ic">☕</span><span>Tippe die Zutaten in der Reihenfolge vom Bon.</span></li>
+      <li><span class="ic">⏳</span><span>Sei fertig, bevor dem Gast die Geduld ausgeht.</span></li>
+      <li><span class="ic">🧘</span><span>In der Yoga-Pause: im Atemrhythmus tippen und Zen laden.</span></li>
+    </ul>
+    <button class="btn" id="btnStart">Schicht starten</button>
+    <p class="best" id="best"></p>
+    <div class="startfoot"><button class="btn ghost" id="btnSound">Ton: an</button><span class="by" id="startBy"></span></div>
+  </section>
+
+  <section id="s-game" class="screen" hidden>
+    <header class="hud">
+      <div class="hud-tip"><span class="lbl">Trinkgeld</span><b id="tip" class="fat">0,00 €</b></div>
+      <div class="hud-round" id="roundLbl"></div>
+      <div class="hud-right"><span id="vibes" aria-label="Good Vibes"></span><button id="btnPause" class="iconbtn" aria-label="Pause">II</button></div>
+    </header>
+    <div class="stage" id="stage">
+      <div class="queue" id="queue"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <div class="guest" id="guest">
+        <div class="avatar"><span id="gAvatar"></span><span class="mood" id="gMood"></span></div>
+        <div class="gtext"><div class="gname" id="gName"></div><div class="gline quote" id="gLine"></div></div>
+      </div>
+      <div class="patience" aria-hidden="true"><div class="pbar" id="pbar"></div></div>
+      <div class="pass">
+        <div class="bon"><div class="bon-title fat" id="orderName"></div><ol class="steps" id="steps"></ol></div>
+        <div class="glass" id="glass"><div class="layers" id="layers"></div><div class="topper" id="topper"></div></div>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="flow" id="flow"></div>
+      <button id="btnBreath" class="breath">🧘 Durchatmen <b id="breathN">0</b></button>
+    </div>
+    <div class="stations" id="stations">
+      <div class="hazard" id="hazard" hidden><span id="crawler"></span><b id="hazardTxt" class="fat"></b></div>
+    </div>
+  </section>
+
+  <section id="s-yoga" class="screen" hidden>
+    <p class="kicker">Yoga-Pause</p>
+    <h2>Erst mal atmen.</h2>
+    <p class="pose quote" id="yogaPose"></p>
+    <button class="pad" id="pad" aria-label="Im Atemrhythmus tippen">
+      <span class="ring"></span><span class="ring in"></span><span class="blob" id="blob"><img src="maima-icon.png" alt="" width="420" height="358"></span>
+    </button>
+    <p class="padlbl fat" id="padLbl">Bereit?</p>
+    <p class="fb" id="yogaFb"></p>
+    <div class="zen" aria-hidden="true"><div id="zenFill"></div></div>
+    <p class="hint-txt">Tippe immer dann, wenn der Kreis einen Ring berührt.</p>
+  </section>
+
+  <section id="s-end" class="screen" hidden>
+    <img class="endico" src="maima-icon.png" alt="maima Lounge" width="420" height="358">
+    <p class="kicker" id="endKicker"></p>
+    <h2 id="endTitle"></h2>
+    <div class="bigtip fat" id="endTip"></div>
+    <div class="rank" id="endRank"></div>
+    <dl class="stats">
+      <div><dt>Bedient</dt><dd class="fat" id="stServed">0</dd></div>
+      <div><dt>Bester Flow</dt><dd class="fat" id="stFlow">0</dd></div>
+      <div><dt>Rekord</dt><dd class="fat" id="stBest">0</dd></div>
+    </dl>
+    <p class="gruss quote" id="endGruss"></p>
+    <button class="btn" id="btnAgain">Nochmal</button>
+  </section>
+
+  <div id="overlay" hidden>
+    <div class="card">
+      <div class="emo" id="ovEmo"></div>
+      <h2 id="ovTitle"></h2>
+      <p id="ovText"></p>
+      <button class="btn" id="ovBtn">Los!</button>
+      <button class="btn ghost" id="ovBtn2" hidden></button>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+/* =====================================================================
+   HIER ANPASSEN: Namen, Sprüche und Insider. Alles andere läuft von allein.
+   ===================================================================== */
+const CONFIG = {
+  chefin: 'Elena',
+  kicker: 'Dein Adventskalender-Spiel',
+  von: 'Von deinem Team',
+  gruss: 'Danke, dass du aus Yoga, Kaffee und uns Chaoten den schönsten Laden in Ravensburg machst. Frohe Weihnachten! Dein Team',
+  raenge: [ [0,'Azubi am Siebträger'], [70,'Hafermilch-Heldin'], [110,'Latte-Art-Legende'], [150,'Erleuchtete Zen-Meisterin'] ],
+  posen: ['Herabschauender Hund. Der Hund schaut, du atmest.', 'Krieger II. Aber ein sehr friedlicher.', 'Der Baum. Wackeln ist erlaubt.', 'Shavasana. Die Pose, die wirklich alle können.'],
+  texte: {
+    muehle: 'Die Mühle streikt! Klopf sie wach.',
+    hafer: 'Hafermilch leer! Schnell neue holen.',
+    baby: 'Achtung, da krabbelt ein Baby los!',
+    kind: 'Achtung, Kind im Anflug!',
+    platsch: 'Platsch! Dem Kind geht es prima. Dem Getränk nicht.',
+    woener: 'WÖNER-ALARM! Viermal auf den Wöner tippen.',
+    wechsel: 'Sie hat es sich anders überlegt!'
+  }
+};
+
+/* Gäste: e = Emoji, n = Name, lines = Sprüche, likes = was sie gern bestellen */
+const GUESTS = [
+  { e:'🧘‍♀️', n:'Frisch vom Yoga',        lines:['Ich komm direkt aus dem Shavasana.','Namasté. Und Koffein, bitte.'], likes:['matcha','chai','matchaherz'] },
+  { e:'👩‍💻', n:'Laptop-Nomadin',         lines:['Und das WLAN-Passwort, bitte.','Ich bleib dann bis 17 Uhr.'], likes:['espresso','flat','icedlatte'] },
+  { e:'🧔',  n:'Stammgast',              lines:['Wie immer!','Du weißt Bescheid.'], likes:['cappu','flat','doppio'] },
+  { e:'👵',  n:'Oma auf Entdeckungstour', lines:['Was ist denn ein Mattscha?','Aber nicht so stark, gell.'], likes:['kakao','cappu','matcha'] },
+  { e:'👩‍👧', n:'Mama mit Kinderwagen',   lines:['Einen großen. Einen SEHR großen.','Ich hab seit Monaten nicht geschlafen.'], likes:['xxl','doppio','herz'] },
+  { e:'🕺',  n:'Der Gutgelaunte',        lines:['Mach mir was Schönes!','Mit extra Liebe, bitte.'], likes:['herz','mokka','matchaherz'] },
+  { e:'🏃‍♀️', n:'Die Eilige',             lines:['Schnell, mein Zug!','Zum Mitnehmen. Ich trink ihn aber hier.'], likes:['espresso','cappu','icedlatte'] },
+  { e:'🎨',  n:'Kreativ-Kopf',           lines:['Irgendwas mit Chai?','Überrasch mich. Aber mit Chai.'], likes:['chai','dirty'] },
+  { e:'🙆‍♀️', n:'Die Yogalehrerin',       lines:['Gleich geht mein Kurs los.','Einatmen. Ausatmen. Bestellen.'], likes:['matcha','chai','icedmatcha'] },
+  { e:'🤩',  n:'Erstbesuch',             lines:['Wow, schön hier!','Was empfiehlst du?'], likes:['herz','kakao','chai'] }
+];
+const SPECIAL = {
+  woener: { e:'🤤', n:'Wöner-Fan', lines:['Einmal Wöner, bitte!','Ich träum seit Tagen vom Wöner.'] },
+  switch: { e:'🤔', n:'Die Unentschlossene', lines:['Hmm … das hier. Glaub ich.'] }
+};
+
+/* Zutaten und Rezepte */
+const ING = {
+  esp:{i:'☕',l:'Espresso',c:'--c-esp'}, oat:{i:'🥛',l:'Hafermilch',c:'--c-oat'}, foam:{i:'☁️',l:'Schaum',c:'--c-foam'},
+  matcha:{i:'🍵',l:'Matcha',c:'--c-matcha'}, chai:{i:'🍂',l:'Chai',c:'--c-chai'}, cocoa:{i:'🍫',l:'Kakao',c:'--c-cocoa'},
+  ice:{i:'❄️',l:'Eis',c:'--c-ice'}, art:{i:'💗',l:'Latte Art',c:'--c-art'}, woener:{i:'🥙',l:'Wöner',c:'--c-woener'}
+};
+const STATIONS = ['esp','oat','foam','matcha','chai','cocoa','ice','art','woener'];
+const RECIPES = {
+  espresso:{n:'Espresso',s:['esp']},
+  doppio:{n:'Doppelter Espresso',s:['esp','esp']},
+  cappu:{n:'Hafer-Cappuccino',s:['esp','oat','foam']},
+  flat:{n:'Flat White',s:['esp','esp','oat']},
+  herz:{n:'Latte mit Herz',s:['esp','oat','foam','art']},
+  matcha:{n:'Matcha Latte',s:['matcha','oat','foam']},
+  chai:{n:'Chai Latte',s:['chai','oat','foam']},
+  dirty:{n:'Dirty Chai',s:['chai','esp','oat','foam']},
+  kakao:{n:'Heiße Schoki',s:['cocoa','oat','foam']},
+  mokka:{n:'Schoko-Latte',s:['esp','cocoa','oat','foam']},
+  icedlatte:{n:'Iced Latte',s:['ice','oat','esp']},
+  icedmatcha:{n:'Iced Matcha',s:['ice','oat','matcha']},
+  matchaherz:{n:'Matcha mit Herz',s:['matcha','oat','foam','art']},
+  xxl:{n:'Der „Ich brauch das jetzt“',s:['esp','esp','oat','foam','art']},
+  woener:{n:'Der legendäre Wöner',s:['woener','woener','woener','woener']}
+};
+
+/* Runden: n = Gäste, pat = Geduld in Sekunden, brk/crawl = Chance auf Panne/Kind pro Gast */
+const ROUNDS = [
+  { name:'Frühschicht', emo:'🌅', text:'Die ersten Gäste trudeln ein. Ganz entspannt. Wird es doch mal eng, hilft „Durchatmen“: Das hält die Zeit kurz an.', n:5, pat:12, brk:0, crawl:0, special:[],
+    pool:['espresso','doppio','cappu','matcha','chai'] },
+  { name:'Mittagsrush', emo:'🥙', text:'Jetzt wird es voll. Und irgendwas ist mit der Mühle. Wenn ein Kind vor deine Füße läuft: Finger weg vom Bildschirm!', n:6, pat:10.5, brk:.35, crawl:.3, special:['woener'],
+    pool:['cappu','flat','herz','matcha','chai','kakao','icedlatte'] },
+  { name:'Yogakurs ist aus', emo:'🧘', text:'Zwölf tiefenentspannte Menschen wollen gleichzeitig Chai.', n:7, pat:9, brk:.3, crawl:.4, special:['switch','woener'],
+    pool:['matcha','chai','dirty','icedmatcha','matchaherz','herz','kakao'] },
+  { name:'Endspurt', emo:'🔥', text:'Letzte Runde vor dem Feierabend. Alles geben!', n:8, pat:8, brk:.35, crawl:.45, special:['switch','woener','woener'],
+    pool:['herz','dirty','mokka','xxl','matchaherz','icedlatte','icedmatcha','flat'] }
+];
+
+/* ===== Helfer ===== */
+const $ = id => document.getElementById(id);
+const rnd = (a,b) => a + Math.random()*(b-a);
+const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+const euro = n => n.toFixed(2).replace('.',',') + ' €';
+const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem('maima.'+k); return v===null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem('maima.'+k,JSON.stringify(v)); }catch(e){} }
+};
+
+/* ===== Ton (wird im Browser erzeugt, keine Dateien) ===== */
+let AC=null, soundOn=store.get('sound',true);
+function tone(f,d,type,v,when){
+  if(!soundOn) return;
+  try{
+    AC = AC || new (window.AudioContext||window.webkitAudioContext)();
+    if(AC.state==='suspended') AC.resume();
+    const t=AC.currentTime+(when||0), o=AC.createOscillator(), g=AC.createGain();
+    o.type=type||'sine'; o.frequency.value=f;
+    g.gain.setValueAtTime(v||.1,t); g.gain.exponentialRampToValueAtTime(.001,t+d);
+    o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t+d+.02);
+  }catch(e){}
+}
+const sfx = {
+  tap:()=>tone(520,.06,'triangle',.12),
+  ok:()=>{ tone(660,.1,'triangle',.12); tone(880,.14,'triangle',.12,.09); tone(1320,.2,'triangle',.1,.18); },
+  bad:()=>tone(150,.2,'sawtooth',.09),
+  bell:()=>tone(1568,.25,'sine',.07),
+  klonk:()=>tone(220,.07,'square',.07),
+  lose:()=>{ tone(300,.2,'sawtooth',.07); tone(200,.3,'sawtooth',.07,.18); },
+  zen:()=>tone(432,.6,'sine',.1),
+  splash:()=>{ tone(400,.08,'sawtooth',.07); tone(120,.3,'sawtooth',.09,.06); }
+};
+const buzz = ms => { try{ navigator.vibrate && navigator.vibrate(ms); }catch(e){} };
+
+/* ===== Spielzustand ===== */
+const S = { gen:0, screen:'start', round:0, tip:0, vibes:3, breaths:1, flow:0, bestFlow:0, served:0,
+  queue:[], guest:null, paused:false, busy:true, freeze:0, hazard:null, broken:null, hints:0 };
+const stBtn = {};
+let ovGo=null, ovGo2=null, toastT=0;
+
+function showScreen(name){ S.screen=name; for(const s of ['start','game','yoga','end']) $('s-'+s).hidden=(s!==name); }
+function later(fn,ms){ const g=S.gen; setTimeout(()=>{ if(g===S.gen) fn(); },ms); }
+function overlay(o){
+  $('ovEmo').textContent=o.emo||''; $('ovTitle').textContent=o.title; $('ovText').textContent=o.text||'';
+  $('ovBtn').textContent=o.btn||'Los!'; ovGo=o.go; ovGo2=o.go2||null;
+  $('ovBtn2').hidden=!o.btn2; if(o.btn2) $('ovBtn2').textContent=o.btn2;
+  $('overlay').hidden=false;
+}
+function closeOverlay(){ $('overlay').hidden=true; }
+function toast(msg,alarm,ms){
+  const t=$('toast'); t.textContent=msg; t.className='toast on'+(alarm?' alarm':'');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('on'),ms||1900);
+}
+function pop(text,bad){
+  const st=$('stage'), p=document.createElement('div'), a=$('glass').getBoundingClientRect(), r=st.getBoundingClientRect();
+  p.className='pop fat'+(bad?' bad':''); p.textContent=text;
+  p.style.right=Math.max(8,r.right-a.right)+'px'; p.style.top=Math.max(4,a.top-r.top-10)+'px';
+  st.appendChild(p); setTimeout(()=>p.remove(),1000);
+}
+function shake(node){ node.classList.remove('shake'); void node.offsetWidth; node.classList.add('shake'); }
+function clearHints(){ document.querySelectorAll('.st.hint').forEach(b=>b.classList.remove('hint')); }
+
+/* ===== Runde aufbauen ===== */
+function makeOrder(g,rec,R){
+  const steps=rec.s.slice(), pat=R.pat+Math.max(-1,(steps.length-3)*.8);
+  return { g, name:rec.n, steps, idx:0, pat, left:pat, t:0, clean:true, line:pick(g.lines) };
+}
+function buildQueue(R){
+  const q=[]; let last=null;
+  for(let k=0;k<R.n;k++){
+    let g; do{ g=pick(GUESTS); }while(g===last); last=g;
+    const liked=g.likes.filter(id=>R.pool.includes(id));
+    q.push(makeOrder(g,RECIPES[liked.length?pick(liked):pick(R.pool)],R));
+  }
+  const slots=q.map((_,k)=>k).slice(1).sort(()=>Math.random()-.5);      // Sondergäste nie als Erstes
+  for(const sp of R.special){
+    if(!slots.length) break;
+    const o=makeOrder(SPECIAL[sp], sp==='woener'?RECIPES.woener:RECIPES[pick(R.pool)], R);
+    o.special=sp; if(sp==='switch') o.switchAfter=1+Math.floor(Math.random()*2);
+    q[slots.pop()]=o;
+  }
+  const rest=q.slice(1);
+  rest.forEach(o=>{
+    if(Math.random()<R.brk){ const c=['esp','oat'].filter(id=>o.steps.includes(id)); if(c.length) o.brk=pick(c); }
+    if(Math.random()<R.crawl && canCrawl(o) && !(o.brk && S.round<2)) setCrawl(o);
+  });
+  if(R.crawl && !rest.some(o=>o.crawlAfter)){ const c=rest.filter(o=>!o.brk && canCrawl(o)); if(c.length) setCrawl(pick(c)); }
+  if(R.brk && !rest.some(o=>o.brk)){ const c=rest.filter(o=>!o.crawlAfter && o.steps.includes('esp')); if(c.length) pick(c).brk='esp'; }
+  S.queue=q;
+}
+function canCrawl(o){ return o.steps.length>=2 && o.special!=='switch'; }
+function setCrawl(o){ o.crawlAfter=1+Math.floor(Math.random()*Math.min(2,o.steps.length-1)); }   // Kind kommt nach dem 1. oder 2. Handgriff
+function startGame(){
+  S.gen++;
+  Object.assign(S,{ round:0, tip:0, vibes:3, breaths:1, flow:0, bestFlow:0, served:0, queue:[], guest:null,
+    paused:false, busy:true, freeze:0, hazard:null, hints:2 });
+  introRound(0);
+}
+function introRound(i){
+  S.round=i; const R=ROUNDS[i];
+  endHazard(); clearBroken(); clearHints(); buildQueue(R); S.guest=null; S.busy=true; S.freeze=0;
+  for(const id of ['gAvatar','gMood','gName','gLine','orderName','queue','steps']) $(id).textContent='';
+  resetGlass(null); $('pbar').style.width='100%'; $('pbar').className='pbar';
+  showScreen('game'); updateHud();
+  overlay({ emo:R.emo, title:R.name, text:R.text, btn:'Los!', go:()=>{ closeOverlay(); nextGuest(); } });
+}
+
+/* ===== Gast an der Theke ===== */
+function nextGuest(){
+  if(!S.queue.length){ S.guest=null; S.busy=true; if(S.round>=ROUNDS.length-1) endGame(true); else startYoga(); return; }
+  const o=S.queue.shift(); S.guest=o; S.freeze=0; clearBroken(); renderGuest(o);
+  const ge=$('guest'); ge.className='guest in'; void ge.offsetWidth; ge.className='guest';
+  sfx.bell(); S.busy=false;
+  if(o.brk) breakStation(o.brk);
+  if(o.special==='woener') toast(CONFIG.texte.woener,true,2400);
+  updateHud(); hintNext();
+}
+function renderGuest(o){
+  $('gAvatar').textContent=o.g.e; $('gMood').textContent='🙂'; $('gName').textContent=o.g.n;
+  $('gLine').textContent='„'+o.line+'“'; $('orderName').textContent=o.name;
+  const q=$('queue'); q.textContent='';
+  if(S.queue.length){ q.append('Schlange: '); S.queue.slice(0,7).forEach(x=>{ const i=document.createElement('i'); i.textContent=x.g.e; q.append(i); }); }
+  else q.textContent='Letzter Gast dieser Runde';
+  resetGlass(o); renderSteps(o);
+}
+function resetGlass(o){
+  $('glass').className='glass'+(o&&o.steps[0]==='woener'?' plate':''); $('layers').textContent='';
+  const t=$('topper'); t.className='topper'; t.textContent=''; t.style.transform='';
+}
+function renderSteps(o){
+  const ol=$('steps'); ol.textContent='';
+  o.steps.forEach((id,k)=>{ const li=document.createElement('li'); li.textContent=ING[id].i; li.title=ING[id].l;
+    li.className=k<o.idx?'done':k===o.idx?'next':''; ol.append(li); });
+}
+function addLayer(o,id){
+  const t=$('topper');
+  if(id==='woener'){ t.textContent='🥙'; t.classList.add('on'); t.style.transform='scale('+(.4+.2*o.idx)+')'; return; }
+  if(id==='art'){ t.textContent='💗'; t.classList.add('on'); return; }
+  const d=document.createElement('div'); d.style.background='var('+ING[id].c+')'; $('layers').append(d);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{ d.style.height='19%'; }));
+}
+function hintNext(){
+  clearHints(); const o=S.guest; if(!o||S.hints<=0||S.busy) return;
+  const b=stBtn[S.broken?S.broken.id:o.steps[o.idx]]; if(b) b.classList.add('hint');
+}
+function updateHud(){
+  $('tip').textContent=euro(S.tip);
+  $('roundLbl').textContent='Runde '+(S.round+1)+'/'+ROUNDS.length;
+  $('vibes').innerHTML=[0,1,2].map(k=>'<span class="vibe'+(k<S.vibes?'':' off')+'"></span>').join('');
+  $('breathN').textContent=S.breaths;
+  $('btnBreath').disabled=S.breaths<=0&&S.freeze<=0; $('btnBreath').classList.toggle('active',S.freeze>0);
+  $('flow').textContent=S.flow>=2?'Im Flow ×'+S.flow:'';
+}
+
+/* ===== Tippen ===== */
+function setStLabel(b,id,icon,label){ b.children[0].textContent=icon||ING[id].i; b.children[1].textContent=label||ING[id].l; }
+function buildStations(){
+  const wrap=$('stations'), hz=$('hazard');
+  STATIONS.forEach(id=>{
+    const b=document.createElement('button'); b.className='st'+(id==='woener'?' gold':'');
+    b.style.setProperty('--stc','var('+ING[id].c+')');
+    b.innerHTML='<span class="st-i"></span><span class="st-l"></span>'; setStLabel(b,id);
+    b.addEventListener('pointerdown',e=>{ e.preventDefault(); tapStation(id); });
+    b.addEventListener('click',e=>{ if(e.detail===0) tapStation(id); });       // Tastatur
+    wrap.insertBefore(b,hz); stBtn[id]=b;
+  });
+  hz.addEventListener('pointerdown',e=>{ e.preventDefault(); trip(); });
+}
+function tapStation(id){
+  const o=S.guest; if(S.screen!=='game'||S.paused||S.busy||!o) return;
+  if(S.hazard&&S.hazard.phase==='active'){ trip(); return; }
+  const b=stBtn[id];
+  if(S.broken&&S.broken.id===id){
+    S.broken.n--; sfx.klonk(); buzz(15);
+    if(S.broken.n<=0){ clearBroken(); toast(id==='esp'?'Die Mühle läuft wieder.':'Hafermilch ist wieder da.',false,1200); }
+    else b.children[1].textContent=S.broken.n+'× tippen';
+    hintNext(); return;
+  }
+  if(id===o.steps[o.idx]){
+    o.idx++; sfx.tap(); addLayer(o,id); renderSteps(o);
+    if(o.idx>=o.steps.length) completeOrder();
+    else if(o.switchAfter===o.idx){ o.switchAfter=0; switchOrder(o); }
+    else{ if(o.crawlAfter===o.idx&&!S.hazard){ o.crawlAfter=0; startHazard(); } hintNext(); }
+  }else{
+    o.left-=1.5; o.clean=false; S.flow=0; sfx.bad(); buzz(60);
+    b.classList.remove('wrong'); void b.offsetWidth; b.classList.add('wrong');
+    pop('−1,5 s',true); updateHud();
+  }
+}
+function completeOrder(){
+  const o=S.guest; S.busy=true; endHazard(); clearHints();
+  if(o.clean) S.flow++; S.bestFlow=Math.max(S.bestFlow,S.flow);
+  const base=.5*o.steps.length+(o.special==='woener'?3:0), speed=2*clamp(o.left/o.pat,0,1), mult=1+Math.min(S.flow,10)*.1;
+  const t=Math.round((base+speed)*mult*10)/10;
+  S.tip+=t; S.served++; if(S.hints>0) S.hints--;
+  $('gMood').textContent='😍'; pop('+'+euro(t)); sfx.ok(); $('glass').classList.add('served'); updateHud();
+  later(()=>{ $('guest').classList.add('out'); later(nextGuest,260); },600);
+}
+function failOrder(){
+  const o=S.guest; S.busy=true; endHazard(); clearHints(); S.vibes--; S.flow=0; if(S.hints>0) S.hints--;
+  $('gMood').textContent='😤'; toast(o.g.n+' hat keine Geduld mehr und geht.',false,1500);
+  sfx.lose(); buzz(120); shake($('stage')); updateHud();
+  later(()=>{ $('guest').classList.add('out'); later(()=>{ if(S.vibes<=0) endGame(false); else nextGuest(); },300); },900);
+}
+function breathe(){
+  const o=S.guest; if(S.screen!=='game'||S.paused||S.busy||!o||S.breaths<=0||S.freeze>0) return;
+  S.breaths--; S.freeze=5; sfx.zen(); toast('Tief durchatmen. Die Zeit steht still.',false,1600); updateHud();
+}
+
+/* ===== Pannen: Mühle, Hafermilch, Kinder vor den Füßen, Unentschlossene ===== */
+function breakStation(id){
+  const n=id==='esp'?3:2; S.broken={id,n}; const b=stBtn[id];
+  b.classList.add('broken'); setStLabel(b,id,id==='esp'?'🔧':'📦',n+'× tippen');
+  toast(id==='esp'?CONFIG.texte.muehle:CONFIG.texte.hafer,true,2200);
+}
+function clearBroken(){
+  if(!S.broken) return; const b=stBtn[S.broken.id];
+  b.classList.remove('broken'); setStLabel(b,S.broken.id); S.broken=null;
+}
+function startHazard(){
+  const kind=Math.random()<.6?'baby':'kind';
+  S.hazard={ kind, phase:'warn', t:0, warn:kind==='baby'?.9:.65, dur:kind==='baby'?2.3:1.3, tripped:false, dir:Math.random()<.5?1:-1 };
+  $('stations').classList.add('warn'); toast(CONFIG.texte[kind],true,1400); sfx.bell();
+}
+function tickHazard(dt){
+  const h=S.hazard; h.t+=dt;
+  if(h.phase==='warn'&&h.t>=h.warn){
+    h.phase='active'; h.t=0; $('crawler').textContent=h.kind==='baby'?'👶':'🧒';
+    $('hazardTxt').innerHTML='STOPP!<small>'+(h.kind==='baby'?'Baby':'Kind')+' vor den Füßen. Nicht tippen!</small>';
+    $('hazard').hidden=false;
+  }
+  if(h.phase==='active'){
+    const w=$('hazard').clientWidth, p=clamp(h.t/h.dur,0,1), x=(h.dir>0?p:1-p)*(w+60)-60;
+    $('crawler').style.transform='translate('+x+'px,'+(Math.sin(h.t*14)*4)+'px)';
+    if(h.t>=h.dur){ const ok=!h.tripped; endHazard(); if(ok){ S.tip+=.5; pop('+0,50 € fürs Warten'); updateHud(); } }
+  }
+}
+function endHazard(){ if(!S.hazard) return; S.hazard=null; $('hazard').hidden=true; $('stations').classList.remove('warn'); }
+function trip(){
+  const h=S.hazard, o=S.guest; if(!h||h.phase!=='active'||h.tripped||!o||S.busy) return;
+  h.tripped=true; o.idx=0; o.clean=false; o.left-=1; S.flow=0; resetGlass(o); renderSteps(o);
+  toast(CONFIG.texte.platsch,false,2000); sfx.splash(); buzz(150); shake($('stage')); updateHud(); hintNext();
+}
+function switchOrder(o){
+  const R=ROUNDS[S.round]; let rec; do{ rec=RECIPES[pick(R.pool)]; }while(rec.n===o.name);
+  o.name=rec.n; o.steps=rec.s.slice(); o.idx=0; o.left=Math.min(o.pat,o.left+3.5); o.line='Ach nee, doch lieber: '+rec.n+'!';
+  $('gLine').textContent='„'+o.line+'“'; $('orderName').textContent=o.name; resetGlass(o); renderSteps(o);
+  toast(CONFIG.texte.wechsel,true,1700); sfx.bell(); shake(document.querySelector('.bon')); hintNext();
+}
+
+/* ===== Takt der Theke ===== */
+function tickGame(dt){
+  const o=S.guest; if(!o||S.busy) return;
+  o.t+=dt;
+  if(S.hazard) tickHazard(dt);
+  const stopped=S.freeze>0||(S.hazard&&S.hazard.phase==='active');
+  if(S.freeze>0){ S.freeze-=dt; if(S.freeze<=0){ S.freeze=0; updateHud(); } }
+  if(!stopped) o.left-=dt;
+  const f=clamp(o.left/o.pat,0,1), pb=$('pbar');
+  pb.style.width=(f*100)+'%'; pb.className='pbar'+(S.freeze>0?' frozen':f<.25?' low':f<.55?' mid':'');
+  $('gMood').textContent=f<.25?'😠':f<.55?'😐':'🙂';
+  if(o.left<=0) failOrder();
+}
+
+/* ===== Yoga-Pause: an den Wendepunkten des Atems tippen ===== */
+const Y = { t:0, per:2.2, n:8, hit:[], pen:0, done:true };
+const fb = s => { $('yogaFb').textContent=s; };
+function yogaScore(){ let sum=0; for(let j=1;j<=Y.n;j++) sum+=Y.hit[j]||0; return clamp((sum-Y.pen)/Y.n,0,1); }
+function startYoga(){
+  Y.t=-1.4; Y.hit=[]; Y.pen=0; Y.done=false;
+  $('yogaPose').textContent=pick(CONFIG.posen); fb(''); $('zenFill').style.width='0%';
+  $('padLbl').textContent='Bereit?'; $('blob').style.transform='scale(.45)';
+  showScreen('yoga');
+}
+function tickYoga(dt){
+  Y.t+=dt; const t=Y.t; if(t<0) return;
+  for(let j=1;j<=Y.n;j++) if(Y.hit[j]===undefined&&t>j*Y.per+.45){ Y.hit[j]=0; fb('Verpasst'); }
+  const ph=t/Y.per, k=Math.floor(ph);
+  if(k>=Y.n){ if(t>Y.n*Y.per+.5) finishYoga(); return; }
+  const up=k%2===0, e=.5-.5*Math.cos(Math.PI*(ph-k)), s=up?.45+.55*e:1-.55*e;
+  $('blob').style.transform='scale('+s+')'; $('padLbl').textContent=up?'Einatmen':'Ausatmen';
+}
+function tapYoga(){
+  if(S.screen!=='yoga'||S.paused||Y.done||Y.t<0) return;
+  const j=Math.round(Y.t/Y.per), d=Math.abs(Y.t-j*Y.per);
+  if(j<1||j>Y.n||Y.hit[j]!==undefined||d>.45){ Y.pen+=.15; fb('Ganz ruhig. Nicht hetzen.'); buzz(30); }
+  else if(d<=.17){ Y.hit[j]=1; fb('Perfekt ✨'); tone(528,.5,'sine',.1); }
+  else{ Y.hit[j]=.6; fb(Y.t<j*Y.per?'Gut, einen Hauch zu früh':'Gut, einen Hauch zu spät'); tone(432,.4,'sine',.08); }
+  $('zenFill').style.width=Math.round(yogaScore()*100)+'%';
+}
+function finishYoga(){
+  Y.done=true;
+  const pct=yogaScore(), plus=pct>=.8?3:pct>=.55?2:pct>=.3?1:0, before=S.breaths;
+  S.breaths=Math.min(3,S.breaths+plus); const got=S.breaths-before;
+  let heal=false; if(pct>=.8&&S.vibes<3){ S.vibes++; heal=true; }
+  const txt=(got?'Du bekommst '+got+'× Durchatmen. Das hält die Geduld der Gäste 5 Sekunden an.'
+    :plus?'Mehr als 3× Durchatmen passt nicht in die Schürze.'
+    :'Das war eher Schnappatmung. Nächstes Mal ruhiger.')+(heal?' Und ein Good Vibe ist zurück.':'');
+  overlay({ emo:'🧘', title:'Zen: '+Math.round(pct*100)+' %', text:txt, btn:'Weiter', go:()=>{ closeOverlay(); introRound(S.round+1); } });
+}
+
+/* ===== Feierabend ===== */
+function endGame(won){
+  S.gen++; S.busy=true; S.guest=null; endHazard(); clearBroken(); clearHints();
+  if(won) S.tip+=S.breaths;                                    // 1 € pro gespartem Durchatmen
+  const best=Math.max(store.get('best',0),S.tip); store.set('best',best);
+  let rank=CONFIG.raenge[0][1]; for(const [min,name] of CONFIG.raenge) if(S.tip>=min) rank=name;
+  $('endKicker').textContent=won?'Feierabend!':'Die Good Vibes sind aufgebraucht';
+  $('endTitle').textContent=won?'Geschafft, '+CONFIG.chefin+'!':'Puh, '+CONFIG.chefin+'.';
+  $('endTip').textContent=euro(S.tip); $('endRank').textContent=rank;
+  $('stServed').textContent=S.served; $('stFlow').textContent='×'+S.bestFlow; $('stBest').textContent=euro(best);
+  $('endGruss').textContent=CONFIG.gruss;
+  closeOverlay(); showScreen('end'); if(won) sfx.ok();
+}
+
+/* ===== Pause, Ton, Start ===== */
+function toggleSound(){
+  soundOn=!soundOn; store.set('sound',soundOn); const t='Ton: '+(soundOn?'an':'aus');
+  $('btnSound').textContent=t; if(S.paused) $('ovBtn2').textContent=t; if(soundOn) sfx.tap();
+}
+function pause(){
+  if((S.screen!=='game'&&S.screen!=='yoga')||S.paused||!$('overlay').hidden) return;
+  S.paused=true;
+  overlay({ emo:'⏸️', title:'Pause', text:'Kurz durchatmen. Die Gäste warten so lange.', btn:'Weiter',
+    go:()=>{ S.paused=false; closeOverlay(); }, btn2:'Ton: '+(soundOn?'an':'aus'), go2:toggleSound });
+}
+let lastTs=0;
+function frame(ts){
+  const dt=Math.min(.1,Math.max(0,(ts-lastTs)/1000)); lastTs=ts;
+  if(!S.paused){ if(S.screen==='game') tickGame(dt); else if(S.screen==='yoga'&&!Y.done) tickYoga(dt); }
+  requestAnimationFrame(frame);
+}
+function init(){
+  buildStations();
+  $('startKicker').textContent=CONFIG.kicker; $('startBy').textContent=CONFIG.von; $('btnSound').textContent='Ton: '+(soundOn?'an':'aus');
+  const b=store.get('best',0); $('best').textContent=b?'Dein Rekord: '+euro(b)+' Trinkgeld':'';
+  $('btnStart').addEventListener('click',()=>{ sfx.tap(); startGame(); });
+  $('btnAgain').addEventListener('click',()=>{ sfx.tap(); startGame(); });
+  $('btnSound').addEventListener('click',toggleSound);
+  $('btnPause').addEventListener('click',pause);
+  $('btnBreath').addEventListener('pointerdown',e=>{ e.preventDefault(); breathe(); });
+  $('pad').addEventListener('pointerdown',e=>{ e.preventDefault(); tapYoga(); });
+  $('ovBtn').addEventListener('click',()=>{ if(ovGo) ovGo(); });
+  $('ovBtn2').addEventListener('click',()=>{ if(ovGo2) ovGo2(); });
+  document.addEventListener('visibilitychange',()=>{ if(document.hidden) pause(); });
+  document.addEventListener('contextmenu',e=>e.preventDefault());
+  document.addEventListener('keydown',e=>{                       // am Rechner: 1–9 und Leertaste
+    if(e.repeat||!$('overlay').hidden) return;
+    if(e.key>='1'&&e.key<='9'){ tapStation(STATIONS[+e.key-1]); }
+    else if(e.key===' '){ e.preventDefault(); if(S.screen==='yoga') tapYoga(); else breathe(); }
+  });
+  showScreen('start'); requestAnimationFrame(frame);
+}
+if(window.claude&&window.claude.hot&&window.claude.hot.ready) window.claude.hot.ready(init); else init();
+</script>
+
+</body></html>
